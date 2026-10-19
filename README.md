@@ -1,6 +1,6 @@
 # Agrovet Sales Dashboard (Power BI)
 
-An interactive Power BI (business intelligence) dashboard that shows how an agrovet business sold across Kenyan counties in 2024 and 2025. The raw sales data was messy, so most of the work was cleaning it in Power Query before building the report.
+Interactive Power BI dashboard built from 1,780 sample orders across eight Kenyan counties (2024 to 2025). It tracks 18.16M Kenya shillings (KES) in revenue, top products, payment methods and rainfall. Year, quarter and county filters help managers explore the data. Uasin Gishu led revenue at 3.7M.
 
 ![Dashboard preview](images/dashboard.png)
 
