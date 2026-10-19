@@ -2,7 +2,7 @@
 
 Interactive Power BI dashboard built from 1,780 sample orders across eight Kenyan counties (2024 to 2025). It tracks 18.16M Kenya shillings (KES) in revenue, top products, payment methods and rainfall. Year, quarter and county filters help managers explore the data. Uasin Gishu led revenue at 3.7M.
 
-![Dashboard preview](images/dashboard.png)
+![Dashboard preview](agrovet_sales_dashboard_preview.png)
 
 ## Business questions
 
