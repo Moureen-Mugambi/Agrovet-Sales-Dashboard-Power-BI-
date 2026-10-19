@@ -1,6 +1,6 @@
 # Agrovet Sales Dashboard (Power BI)
 
-Interactive Power BI dashboard built from 1,780 sample orders across eight Kenyan counties (2024 to 2025). It tracks 18.16M Kenya shillings (KES) in revenue, top products, payment methods and rainfall. Year, quarter and county filters help managers explore the data. Uasin Gishu led revenue at 3.7M.
+An interactive Power BI (business intelligence) dashboard that shows how an agrovet business sold across Kenyan counties in 2024 and 2025. The raw sales data was messy, so most of the work was cleaning it in Power Query before building the report.
 
 ![Dashboard preview](agrovet_sales_dashboard_preview.png)
 
@@ -71,6 +71,50 @@ else if Text.Length(t) = 11 then Date.FromText(t, [Format="dd-MMM-yyyy", Culture
 else Date.FromText(t, [Format="yyyy-MM-dd"])
 ```
 
+## Key insights
+
+Figures are read from the dashboard. Monthly values are approximate and combine 2024 and 2025. The data is sample data, so these show how I read the dashboard, not facts about a real business.
+
+| Area | What the dashboard shows | Why it matters |
+|---|---|---|
+| Counties | Uasin Gishu leads, then Machakos and Kisii. Kilifi is lowest, with Meru second lowest | Sales depend on a few strong counties. The two weakest are the clearest growth gap |
+| Products | Fertilizer is the largest category by a wide margin and the top product. Seeds and Veterinary are the smallest | Fertilizer drives the business, so a stock-out would hurt revenue most |
+| Customers | Commercial Farms are the top customer type, and their share changes from month to month | A few large buyers can swing results. Their orders need close tracking |
+| Payments | M-Pesa takes 52.3% of revenue and Cash 26.4%. Together they are about 79%. Credit is 8.9% and Bank Transfer 7.7% | Most money arrives through mobile money and cash, so credit risk is low |
+| Missing payment data | About 5% of revenue has no payment method (`Unknown`) | Some sales cannot be traced to a payment channel |
+| Seasonality | Monthly revenue sits near 1.2M to 1.7M. September peaks at about 2.7M, nearly double most months | September may be a planting-season buying peak. Check whether it comes from one year only |
+| Rainfall | Rainfall peaks in April (about 200 mm) while revenue stays flat. The September revenue peak comes with moderate rainfall | The two lines do not move together in this data. Rainfall is sample data, so this proves nothing |
+
+## Recommendations
+
+| # | Recommendation | Reason |
+|---|---|---|
+| 1 | Build fertilizer stock early, ahead of the September peak | Fertilizer is the largest category and September is the busiest month |
+| 2 | Study Kilifi and Meru before spending on them. Check customer base, branch coverage and competitors | They are the two lowest counties, so the cause needs checking first |
+| 3 | Protect Uasin Gishu, Machakos and Kisii with strong stock and regular visits | They carry the largest share of revenue |
+| 4 | Assign an account manager to each Commercial Farm | They are the top customer type and their buying changes month to month |
+| 5 | Make payment method and sales rep required fields at order entry | 54 payment methods and 91 sales reps were blank in the raw data |
+| 6 | Keep M-Pesa and cash as the main channels. Offer credit only to trusted, repeat customers | They carry about 79% of revenue, while credit is under 9% |
+| 7 | Replace the sample rainfall with real weather records before using it for planning | The current rainfall is AI-drafted, so it cannot guide stock decisions |
+
+## Cleaning process in screenshots
+
+**1. Raw data before cleaning.** Mixed county spelling and case (`meru`, `NAKURU`, `UasinGishu`), five date formats, and `AG-` order IDs. The applied steps show duplicates removed on the whole row and then on `Order_ID`.
+
+![Raw data before cleaning](images/01_raw_data_before_cleaning.png)
+
+**2. Date cleaning formula.** A custom column that reads each date format and turns it into a proper date.
+
+![Date cleaning formula](images/02_date_cleaning_formula.png)
+
+**3. Price and payment issues.** Prices stored as text (`KES 1,100`, `Ksh 1,320`) and payment methods typed several ways (`mpesa`, `Mpesa`, `M-Pesa`).
+
+![Price and payment issues](images/03_price_and_payment_issues.png)
+
+**4. Discount fix.** The `Discount_Fixed` custom column that puts every discount on the same scale.
+
+![Discount fix formula](images/04_discount_fix_formula.png)
+
 ## Skills shown
 
 Power BI, Power Query (M language), data cleaning and standardisation, Data Analysis Expressions (DAX), data modelling, map and chart design, dashboard layout.
@@ -78,11 +122,10 @@ Power BI, Power Query (M language), data cleaning and standardisation, Data Anal
 ## Files
 
 - `Agrovet_Sales_Dashboard.pbix`: the Power BI report
-- `images/`: dashboard preview and cleaning screenshots
+- `images/`: dashboard preview (`dashboard.png`) and four cleaning screenshots
 - `README.md`: this file
 
 ## Notes
 
 - The data is synthetic sample data, drafted with AI for this project. It does not come from a real business. The mess in it (mixed dates, spellings and price formats) was built in on purpose, to practise cleaning.
 - Cleaning assumptions: negative quantities were treated as sign errors, not returns, and the two extreme quantities as extra-zero typos. Rainfall gaps were set to zero, which can pull the monthly rainfall average down slightly.
-- The monthly rainfall figures are also AI-drafted sample values. They are not real weather records, so the revenue and rainfall link in the dashboard is for demonstration only.
