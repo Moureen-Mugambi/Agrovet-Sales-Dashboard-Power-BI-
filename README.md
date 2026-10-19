@@ -26,7 +26,7 @@ An interactive Power BI (business intelligence) dashboard that shows how an agro
 ## Dashboard pages and visuals
 
 - **KPI cards:** total revenue, total orders, total quantity, top product, top customer type, top county.
-- **Slicers:** year and quarter, county.
+- **Slicers:** year, quarter and month, county.
 - **Revenue by County:** bar chart, with a map of the same data.
 - **Payment method share:** donut chart (M-Pesa, Cash, Credit, Bank Transfer, Unknown).
 - **Revenue by Product Category:** treemap (Fertilizer, Agrochemicals, Animal Feed, Equipment, Seeds, Veterinary).
@@ -101,19 +101,19 @@ Figures are read from the dashboard. Monthly values are approximate and combine 
 
 **1. Raw data before cleaning.** Mixed county spelling and case (`meru`, `NAKURU`, `UasinGishu`), five date formats, and `AG-` order IDs. The applied steps show duplicates removed on the whole row and then on `Order_ID`.
 
-![Raw data before cleaning](images/01_raw_data_before_cleaning.png)
+![Raw data before cleaning](01_raw_data_before_cleaning.png)
 
 **2. Date cleaning formula.** A custom column that reads each date format and turns it into a proper date.
 
-![Date cleaning formula](images/02_date_cleaning_formula.png)
+![Date cleaning formula](02_date_cleaning_formula.png)
 
 **3. Price and payment issues.** Prices stored as text (`KES 1,100`, `Ksh 1,320`) and payment methods typed several ways (`mpesa`, `Mpesa`, `M-Pesa`).
 
-![Price and payment issues](images/03_price_and_payment_issues.png)
+![Price and payment issues](03_price_and_payment_issues.png)
 
 **4. Discount fix.** The `Discount_Fixed` custom column that puts every discount on the same scale.
 
-![Discount fix formula](images/04_discount_fix_formula.png)
+![Discount fix formula](04_discount_fix_formula.png)
 
 ## Skills shown
 
@@ -122,10 +122,10 @@ Power BI, Power Query (M language), data cleaning and standardisation, Data Anal
 ## Files
 
 - `Agrovet_Sales_Dashboard.pbix`: the Power BI report
-- `images/`: dashboard preview (`dashboard.png`) and four cleaning screenshots
+- `images/`: dashboard preview (`agrovet_sales_dashboard_preview.png`) and four cleaning screenshots
 - `README.md`: this file
 
 ## Notes
 
-- The data is synthetic sample data, drafted with AI for this project. It does not come from a real business. The mess in it (mixed dates, spellings and price formats) was built in on purpose, to practise cleaning.
+- The data is synthetic sample data, drafted with AI for this project.The mess in it (mixed dates, spellings and price formats) was built in on purpose, to practise cleaning.
 - Cleaning assumptions: negative quantities were treated as sign errors, not returns, and the two extreme quantities as extra-zero typos. Rainfall gaps were set to zero, which can pull the monthly rainfall average down slightly.
